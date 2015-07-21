@@ -31,6 +31,7 @@ angular.module('vmBlocks3App')
       sEfficiencyUnits: "%",
       bFlowIfTrue: true,
       bExhaustPressureIfTrue: true,
+      sDescription:"Some text about the block goes here.  can have line feeds etc" 
       
     } 
     
