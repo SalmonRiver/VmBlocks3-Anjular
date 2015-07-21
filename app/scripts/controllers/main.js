@@ -31,6 +31,7 @@ angular.module('vmBlocks3App')
       sEfficiencyUnits: "%",
       bFlowIfTrue: true,
       bExhaustPressureIfTrue: true,
+      
     } 
     
 
