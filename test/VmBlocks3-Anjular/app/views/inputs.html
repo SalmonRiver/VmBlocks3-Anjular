@@ -1,0 +1,76 @@
+<link rel="stylesheet" href="../styles/main.css">
+<div ng-controller="FirstController">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">Name &nbsp
+                    <input type="text" {{BlockName}}>
+                    <fieldset>
+                        <legend>Status</legend>
+                        <input type="radio" name="rbStatus" value="On" checked>On
+                        <br>
+                        <input type="radio" name="rbStatus" value="Off">Off
+                        <br>
+                        <input type="radio" name="rbStatus" value="Unavailable">Unavailable
+                        <br>
+                    </fieldset>
+            </div>
+            <div class="col-sm-6 ">column 2 </div>
+        </div>
+    </div>
+
+    
+    <table style="width:100%">
+        <table>
+            <tr>
+                <th>Flow
+                    <br>Mechanical Power</th>
+                <td>
+                    <input type="radio" name="PowerType" />
+                    <input type="number">KLB/HR
+                    <br />
+                    <input type="radio" name="PowerType" />
+                    <input type="number">HP</td>
+            </tr>
+            <tr>
+                <th>Hold power constant at Optimization</th>
+                <td>
+                    <input type="checkbox" id="ConstantPower">
+                </td>
+            </tr>
+            <tr>
+                <th>Efficiency</th>
+                <td>
+                    <input type="number" id="Efficiency" data-ng-model="efficiency.percent" ng-init="efficiency.percent=100.00">%</td>
+            </tr>
+            <tr>
+                <th>Exhaust Temperature
+                    <br>Exaust Pressure</th>
+                <td>
+                    <input type="radio" name="Exhaust" />
+                    <input type="number" id="ExhaustTempINP">&#176F
+                    <br />
+                    <input type="radio" name="Exhaust" />
+                    <input type="number" id="ExhaustPressureINP">PSI</td>
+            </tr>
+            <tr>
+                <th throwspan="2">Slow Roll/Fast Roll</th>
+                <td>Slow Roll
+                    <input type="number" id="SlowRoll%">%
+                    <br>Fast Roll
+                    <input type="number" id="FastRoll%">%</td>
+            </tr>
+            <th>Optimization can turn Turbine</th>
+            <td>
+                <input type="radio" name="Optimization" />Off
+                <input type="radio" name="Optimization" />Slow Roll
+                <input type="radio" name="Optimization" />Fast Roll</table>
+        <hr>Efficency:
+        <select name="EfficiencySelect">
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+        </select>
+        <button>OK</button>
+        <button>Cancel</button>
+        <p></p>
+</div>

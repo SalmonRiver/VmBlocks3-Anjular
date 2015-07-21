@@ -1,0 +1,94 @@
+<ul class="nav nav-tabs">
+    <li>
+        <a data-toggle="tab" class="active" href="#tabInputs">Inputs</a>
+    </li>
+    <li>
+        <a data-toggle="tab" href="#tabEquipmentOutputs">Equipment Outputs</a>
+    </li>
+    <li>
+        <a data-toggle="tab" href="#tabStreamOutputs">Stream Outputs</a>
+    </li>
+    <li>
+        <a data-toggle="tab" href="#tabBlockCost">Block Cost</a>
+    </li>
+    <li>
+        <a data-toggle="tab" href="#tabDescription">Description</a>
+    </li>
+</ul>
+<div class="tab-content">
+    <div id="tabInputs" class="tab-pane fade in active">
+        <br>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="row">Name &nbsp
+                    <input type="text" value={{MesaBlock.BlockName}}>
+                </div>
+                <div class="row">
+                    <fieldset>
+                        <h4>Status</h4>
+                        <input type="radio" name="rbStatus" value="On" ng-model="MesaBlock.status">&nbsp On
+                        <br>
+                        <input type="radio" name="rbStatus" value="Off" ng-model="MesaBlock.status">&nbsp Off
+                        <br>
+                        <input type="radio" name="rbStatus" value="Unavailable" ng-model="MesaBlock.status">&nbsp Unavailable
+                        <br>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="row">
+                    <div class="col-sm-3 LeftBox">
+                        <input id="rb1" type="radio" name="rbFlowOrDuty" ng-value="true" ng-model="MesaBlock.bFlowIfTrue">&nbsp Flow
+                        <br>
+                        <input type="radio" name="rbFlowOrDuty" ng-value="false" ng-model="MesaBlock.bFlowIfTrue">&nbsp Duty</div>
+                    <div class="col-sm-6 LeftBox">
+                        <input type="number" value={{MesaBlock.dFlow}} ng-disabled="!MesaBlock.bFlowIfTrue">
+                        <br>
+                        <input type="number" value={{MesaBlock.dDuty}} ng-disabled="MesaBlock.bFlowIfTrue">
+                    </div>
+                    <div class="col-sm-3 RightBox">{{MesaBlock.sFlowUnits}}
+                        <br>{{MesaBlock.sDutyUnits}}</div>
+                </div>
+                <br>
+                <div class="row">
+                    <input type="checkbox" name="cbHoldDutyConstant" value="Yes">&nbsp Hold duty constant at optimization</div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-3">Temperature
+                        <br>Efficiency
+                        <br>Blowdown</div>
+                    <div class="col-sm-6">
+                        <input type="number" value={{MesaBlock.dTemperature}}>
+                        <br>
+                        <input type="number" value={{MesaBlock.dEfficiency}}>
+                        <br>
+                        <input type="number" value={{MesaBlock.dBlowDown}}>
+                    </div>
+                    <div class="col-sm-3">{{MesaBlock.sTemperatureUnits}}
+                        <br>{{MesaBlock.sEfficiencyUnits}}
+                        <br>{{MesaBlock.sBlowDownUnits}}</div>
+                </div>
+                <div class="row small-box">
+                    <h4>Exhaust Pressure</h4>
+                    <div class="col-sm-1">
+                        <input type="radio" name="rbExhaustPressure" ng-value="true" ng-model="MesaBlock.bExhaustPressureIfTrue">
+                        <br>
+                        <input type="radio" name="rbExhaustPressure" ng-value="false" ng-model="MesaBlock.bExhaustPressureIfTrue">
+                    </div>
+                    <div class="col-sm-8">Outlet Header Pressure
+                        <input type="number" value={{MesaBlock.dPressure}}>
+                    </div>
+                    <div class="col-sm-3">
+                        <br>{{MesaBlock.sPressureUnits}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tabEquipmentOutputs" class="tab-pane fade">equipment outputs go here</div>
+    <div id="tabStreamOutputs" class="tab-pane fade">stream outputs go here</div>
+    <div id="tabBlockCost" hidden class="tab-pane fade">Block costs go here</div>
+    <div id="tabDescription" class="tab-pane fade">descriptions goes here</div>
+    <div id="tabEquipmentOutputs" class="tab-pane fade">equipment outputs go here</div>
+    <div id="tabStreamOutputs" class="tab-pane fade">stream outputs go here</div>
+    <div id="tabBlockCost" hidden class="tab-pane fade">Block costs go here</div>
+    <div id="tabDescription" class="tab-pane fade">descriptions goes here</div>
+</div>
