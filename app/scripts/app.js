@@ -26,6 +26,10 @@ angular
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
+      })      
+      .when('/svg', {
+        templateUrl: 'views/svg.html',
+        controller: 'SvgCtrl'
       })
       .otherwise({
         redirectTo: '/'
