@@ -21,16 +21,44 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="row">Name &nbsp
-                    <input type="text" value={{MesaBlock.BlockName}}>
-                    <br>   <br> 
+                    <!-- attempt at making a search box for sName, not what we are looking for -->
+                    <form name="searchBlock" ng-submit="search(blockname)">
+                        <input type="search" required="" placeholder="Blockname to find" ng-model="blockname">
+                        <br>
+                        <input type="submit" value="Search" />
+                        <br>
+                    </form>
+                    <hr>
+                    <!-- the angular filter example, however block.sName and dFlow did not populate with ng-repeat -->
+                    <div ng repeat="block in blocks" ng-init="blockarrays = [{name:'{{block.sName}}', flow:'{{block.dFlow}}'}]"></div>
+                    <label>Search:
+                        <input ng-model="searchText">
+                    </label>
+                    <table id="searchTextResults">
+                        <tr>
+                            <th>Name</th>
+                            <th>flow</th>
+                        </tr>
+                        <tr ng-repeat="blockarray in blockarrays | filter:searchText">
+                            <td>{{blockarray.name}}</td>
+                            <td>{{blockarray.flow}}</td>
+                        </tr>
+                    </table>
+                    <hr>
+                    <!-- drop down menu to select blocks, however i dont know how to call the rest of the data -->
+                    <select ng-model="blockSortOrder">
+                        <option ng-repeat="block in blocks">{{block.sName}}</option>
+                    </select>
+                    <br>
+                    <br>
                 </div>
                 <div class="row small-box">
                     <h5>Status</h5>
-                    <input type="radio" name="rbStatus" value="On" ng-model="MesaBlock.status">&nbsp On
+                    <input type="radio" name="rbStatus" value="StatusOn" ng-model="blocks.Status">&nbsp On
                     <br>
-                    <input type="radio" name="rbStatus" value="Off" ng-model="MesaBlock.status">&nbsp Off
+                    <input type="radio" name="rbStatus" value="StatusOff" ng-model="blocks.Status">&nbsp Off
                     <br>
-                    <input type="radio" name="rbStatus" value="Unavailable" ng-model="MesaBlock.status">&nbsp Unavailable
+                    <input type="radio" name="rbStatus" value="Unavailable" ng-model="blocks.Status">&nbsp Unavailable
                     <br>
                 </div>
             </div>

@@ -12,11 +12,11 @@
  
  
 angular.module('vmBlocks3App')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $http, $location) {
     // dummies values before we hook up to  a web service
     $scope.MesaBlock = {
       BlockName: "B-101",
-      status: "Off",
+      status: "off",
       dFlow: 121.23,
       dDuty: 0,
       dTemperature: 650.2,
@@ -32,7 +32,23 @@ angular.module('vmBlocks3App')
       bFlowIfTrue: true,
       bExhaustPressureIfTrue: true,
       
-    } 
+    }
+        var VmesaURL = "http://demo1.svmesa.com/vmwebapi/Odata/MesaBlocks";
+
+	$http.get (VmesaURL)
+		.success(function(response){
+     // console.log (response);
+		$scope.RawHtmlReturn = response;
+    $scope.blocks = response.value
+   // console.log (response.value);
+		}); 
+    
+    
+    
+    // MY ATTEMPT TO CREATE AN ARRAY AND FILL IT WITH SCOPE DATA, BROKE ANGULAR FUNCTIONS
+    //var MesaData[
+    //  blockname: block.sName
+  //  ]
     
 
 
