@@ -9,27 +9,28 @@
  */
 
 angular.module('vmBlocks3App')
-  .controller('MainCtrl', function ($scope, $http, $location) {
+  .controller('MainCtrl', function ($scope, $http, $location, VmWebAPI) {
     // dummies values before we hook up to  a web service
-   
-    var VmesaURL = "http://demo1.svmesa.com/vmwebapi/Odata/MesaBlocks";
+    
+    var OnComplete = function (data) {
+      $scope.blocks = data;
+    };
 
-    $http.get(VmesaURL)
-      .success(function (response) {
-        // console.log (response);
-        $scope.RawHtmlReturn = response;
-        $scope.blocks = response.value
-         console.log (response.value);
-      });
-      
-      $scope.NavigateTo = function() {
-        console.log("calling navigate " + $scope.selectedBlock);   
+    var OnError = function (reason) {
+      $scope.error = "could not find details";
+    };
+
+    $scope.NavigateTo = function () {
+      console.log("calling navigate " + $scope.selectedBlock);
+
+      $location.path("/MesaBlock");     // need to add the block to load the form on 
         
-        $location.path("/MesaBlock");     // need to add the block to load the form on 
-        
-      }
-      
-     
+    }
+
+    VmWebAPI.getBlocks()
+      .then(OnComplete, OnError);
+
+
   });
   
   

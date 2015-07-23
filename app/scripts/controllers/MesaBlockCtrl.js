@@ -31,3 +31,6 @@ angular.module('vmBlocks3App')
       sDescription:"Some text about the block goes here.  can have line feeds etc" 
     }
   });
+  
+  
+  // http://demo1.svmesa.com/vmwebapi/odata/VmMesaBlockProperties?$filter=BlockName eq 'General Outputs'
