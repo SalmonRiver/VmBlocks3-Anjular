@@ -9,7 +9,7 @@
  */
  
 angular.module('vmBlocks3App')
-  .controller('MesaBlockCtrl', function ($scope) {
+  .controller('MesaBlockCtrl', function ($scope,VmWebAPI) {
     // dummies values before we hook up to  a web service
     $scope.MesaBlock = {
       BlockName: "B-101",
@@ -30,6 +30,19 @@ angular.module('vmBlocks3App')
       bExhaustPressureIfTrue: true,
       sDescription:"Some text about the block goes here.  can have line feeds etc" 
     }
+    
+      var OnComplete = function (data) {
+        console.log (data)
+      $scope.BlockName = data;
+    };
+
+    var OnError = function (reason) {
+      $scope.error = "could not find details";
+    };
+    
+     VmWebAPI.getBlockDetails('600-150-LD')
+      .then(OnComplete, OnError);
+    
   });
   
   

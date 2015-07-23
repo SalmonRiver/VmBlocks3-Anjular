@@ -13,6 +13,7 @@
   var VmWebAPI = function ($http) {
 
     var VmesaURL = "http://demo1.svmesa.com/vmwebapi/Odata/MesaBlocks";
+    var BlockDetailUrl = "http://demo1.svmesa.com/vmwebapi/odata/VmMesaBlockProperties?$filter=BlockName eq "  
 
     var getBlocks = function () {
 
@@ -22,8 +23,21 @@
           return response.data.value;
         });
     };
+    
+     var getBlockDetails = function (sBlockName) {
+
+      return $http.get(BlockDetailUrl + '\'' + sBlockName +  '\'')
+        .then(function (response) {
+          console.log (BlockDetailUrl + '\'' + sBlockName +  '\'')
+          console.log(response.data.value);
+          return response.data.value;
+        });
+    };
+    
+    
     return {
-      getBlocks: getBlocks
+      getBlocks: getBlocks,
+      getBlockDetails: getBlockDetails
     };
   };
 
