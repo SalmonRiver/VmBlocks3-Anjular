@@ -9,7 +9,7 @@
  */
  
 angular.module('vmBlocks3App')
-  .controller('MesaBlockCtrl', function ($scope,VmWebAPI) {
+  .controller('MesaBlockCtrl', function ($scope,VmWebAPI ,$location) {
     // dummies values before we hook up to  a web service
     $scope.MesaBlock = {
       BlockName: "B-101",
@@ -31,8 +31,12 @@ angular.module('vmBlocks3App')
       sDescription:"Some text about the block goes here.  can have line feeds etc" 
     }
     
+      var url = $location.url();
+      var sBlockName = url.replace ("/MesaBlock/","");
+    // need  to condition the url removing special characters 
+    
       var OnComplete = function (data) {
-        console.log (data)
+        console.log ( data);
       $scope.BlockName = data;
     };
 
@@ -40,10 +44,8 @@ angular.module('vmBlocks3App')
       $scope.error = "could not find details";
     };
     
-     VmWebAPI.getBlockDetails('600-150-LD')
+     VmWebAPI.getBlockDetails(sBlockName,1,1)
       .then(OnComplete, OnError);
     
   });
   
-  
-  // http://demo1.svmesa.com/vmwebapi/odata/VmMesaBlockProperties?$filter=BlockName eq 'General Outputs'
