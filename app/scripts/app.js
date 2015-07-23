@@ -31,7 +31,7 @@ angular
         templateUrl: 'views/svg.html',
         controller: 'SvgCtrl'
       })
-      .when('/MesaBlock', {
+      .when('/MesaBlock/:BlockName', {
         templateUrl: 'views/MesaBlock.html',
         controller: 'MesaBlockCtrl'
       })

@@ -23,9 +23,9 @@ angular.module('vmBlocks3App')
       });
       
       $scope.NavigateTo = function() {
-        console.log("calling navigate " + $scope.selectedBlock);   
+        console.log("calling navigate " + $scope.selectedBlock.sName);   
         
-        $location.path("/MesaBlock");     // need to add the block to load the form on 
+        $location.path("/MesaBlock/" +  $scope.selectedBlock.sName);     // need to add the block to load the form on 
         
       }
       
