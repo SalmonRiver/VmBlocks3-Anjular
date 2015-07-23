@@ -2,8 +2,9 @@
 
     <!-- drop down menu to select blocks, however i dont know how to call the rest of the data -->
     <h4> Mesa Block Viewer </h4>
-    Select a block to view:
-    <select ng-model="selectedBlock" ng-change="NavigateTo()">
-        <option ng-repeat="block in blocks">{{block.sName}}</option>
+    <select ng-model="selectedBlock" ng-change="NavigateTo()" ng-options="block.sName for block in blocks" >
+        <option value="" disabled selected>Select a block</option>
+        <!---  ng-options is prefered way to polulate  https://docs.angularjs.org/api/ng/directive/ngOptions --> 
+
     </select>
 </div>
