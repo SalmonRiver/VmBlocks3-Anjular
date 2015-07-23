@@ -17,7 +17,7 @@
     
     var BlockOutPutUrl =  "http://demo1.svmesa.com/vmwebapi/Odata/VmBlockData?$filter=";
     
-    
+ //   http://demo1.svmesa.com/vmwebapi/odata/VmMesaBlockProperties?$filter=BlockName eq '600-150-LD' 
 
 // http://localhost:9001/Odata/VmBlockData?$filter=BlockName eq 'ST-100%20HP' and PropertyIndex eq 1 and Solution eq 1
 
@@ -39,8 +39,6 @@
 
       return $http.get(DetailUrl)
         .then(function (response) {
-      //    console.log (BlockDetailUrl + '\'' + sBlockName +  '\'')
-      //    console.log(response.data.value);
           return response.data.value;
         });
     };
