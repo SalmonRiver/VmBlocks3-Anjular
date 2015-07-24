@@ -13,13 +13,13 @@
   var VmWebAPI = function ($http) {
 
     var VmesaURL = "http://demo1.svmesa.com/vmwebapi/Odata/MesaBlocks";
-    var BlockDetailUrl = "http://demo1.svmesa.com/vmwebapi/odata/VmMesaBlockProperties?$filter=BlockName eq "  ;
-    
-    var BlockOutPutUrl =  "http://demo1.svmesa.com/vmwebapi/Odata/VmBlockData?$filter=";
-    
- //   http://demo1.svmesa.com/vmwebapi/odata/VmMesaBlockProperties?$filter=BlockName eq '600-150-LD' 
+    var BlockDetailUrl = "http://demo1.svmesa.com/vmwebapi/odata/VmMesaBlockProperties?$filter=BlockName eq ";
 
-// http://localhost:9001/Odata/VmBlockData?$filter=BlockName eq 'ST-100%20HP' and PropertyIndex eq 1 and Solution eq 1
+    var BlockOutPutUrl = "http://demo1.svmesa.com/vmwebapi/Odata/VmBlockData?$filter=";
+    
+    //   http://demo1.svmesa.com/vmwebapi/odata/VmMesaBlockProperties?$filter=BlockName eq '600-150-LD' 
+
+    // http://localhost:9001/Odata/VmBlockData?$filter=BlockName eq 'ST-100%20HP' and PropertyIndex eq 1 and Solution eq 1
 
     var getBlocks = function () {
 
@@ -29,24 +29,29 @@
           return response.data.value;
         });
     };
-    
-     var getBlockDetails = function (sBlockName , iPropertyIndex, iSolutuionIndex) {
-       var BlockNameArgUrl = 'BlockName eq ' + '\'' + sBlockName + '\''; 
-       var PropertyIndexUrl =  ' and PropertyIndex eq ' +  iPropertyIndex ; 
-       var SolutionUrl =  ' and Solution eq ' +  iSolutuionIndex ;   
-       var DetailUrl = BlockOutPutUrl +  BlockNameArgUrl+    PropertyIndexUrl +  SolutionUrl
-       console.log (DetailUrl);
+
+    var getBlockProperty = function (sBlockName, iPropertyIndex, iSolutuionIndex) {
+      var BlockNameArgUrl = 'BlockName eq ' + '\'' + sBlockName + '\'';
+      var PropertyIndexUrl = ' and PropertyIndex eq ' + iPropertyIndex;
+      var SolutionUrl = ' and Solution eq ' + iSolutuionIndex;
+      var DetailUrl = BlockOutPutUrl + BlockNameArgUrl + PropertyIndexUrl + SolutionUrl
+     // console.log(DetailUrl);
 
       return $http.get(DetailUrl)
         .then(function (response) {
-          return response.data.value;
+          var mbReturn = response.data.value[0];
+   //       console.log(mbReturn);
+          return mbReturn;
         });
     };
-    
-    
+
+
+
+
+
     return {
       getBlocks: getBlocks,
-      getBlockDetails: getBlockDetails
+      getBlockProperty: getBlockProperty
     };
   };
 
