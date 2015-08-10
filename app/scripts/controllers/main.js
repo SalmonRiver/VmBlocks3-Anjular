@@ -21,7 +21,7 @@ angular.module('vmBlocks3App')
     var OnComplete = function (data) {
       $scope.blocks = data;
      // currently this filter brings back boiler efficiency blocks as well
-      var Boilers = $filter('filter')(data, { eComponentType: "vm_mbt_boiler" })
+      var Boilers = $filter('filter')(data, { eComponentType: "vm_mbt_boiler" },true)
       $scope.Boilers = Boilers;
     };
 
