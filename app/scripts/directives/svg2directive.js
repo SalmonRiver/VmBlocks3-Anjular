@@ -32,6 +32,8 @@ angular.module('vmBlocks3App').directive('region', ['$compile', function ($compi
         link: function (scope, element, attrs) {
             scope.elementId = element.attr("id");
             scope.regionClick = function () {
+                
+                console.log (scope);
                 alert("Hello world");
                 //  scope.stroke = "#000000";
                 element.attr("ng-attr-fill", "{{2 | random_color}}");
