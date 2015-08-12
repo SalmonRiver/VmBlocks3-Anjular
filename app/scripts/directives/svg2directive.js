@@ -11,44 +11,39 @@
 angular.module('vmBlocks3App').directive('svg2Diagram', ['$compile', function ($compile) {
     return {
         restrict: 'A',
-        templateUrl: 'svg/alky.svg',
+        templateUrl: 'svg/simple.svg',
         link: function (scope, element, attrs) {
-            var regions = element[0].querySelectorAll('.IAMVM');
-            angular.forEach(regions, function (path, key) {
-                var regionElement = angular.element(path);
-                regionElement.attr("region", "");
-                regionElement.attr("hover-region", "hoverRegion"); //<--- Add this
-                $compile(regionElement)(scope);
+            var shapes = element[0].querySelectorAll('g')
+
+            angular.forEach(shapes, function (path, key) {
+                var shapeElement = angular.element(path);
+                shapeElement.attr("shape", "");
+             //   console.log(shapeElement);
+                $compile(shapeElement)(scope);
+
             })
         }
     }
 }]);
 
-
-angular.module('vmBlocks3App').directive('region', ['$compile', function ($compile) {
+angular.module('vmBlocks3App').directive('shape', ['$compile', function ($compile) {
     return {
         restrict: 'A',
         scope: true,
         link: function (scope, element, attrs) {
             scope.elementId = element.attr("id");
             scope.regionClick = function () {
-                
-                console.log (scope);
-                alert("Hello world");
-                //  scope.stroke = "#000000";
-                element.attr("ng-attr-fill", "{{2 | random_color}}");
-
-
-            };
-            scope.regionMouseOver = function () {               //<
-                scope.hoverRegion = scope.elementId;            //<--- Add this
-                element[0].parentNode.appendChild(element[0]);  //<
+                if (scope.elementId != null) {
+                    
+                    console.log(element);
+                    alert("Hello world,  My Id is: " + scope.elementId);
+                 //   var map = element[0].querySelectorAll('NamedNodeMap').getNamedItem('v:custprops');
+                 //   console.log (scope.userDefs);
+                }
             };
             element.attr("ng-click", "regionClick()");
-            //  element.attr("ng-attr-fill", "{{0 | random_color}}"); //<--- THIS BIT!
-            element.removeAttr("region");   
-            element.attr("ng-mouseover", "regionMouseOver()"); //<--- Add this
-            element.attr("ng-class", "{active:hoverRegion==elementId}"); //<--- Add this
+
+            element.removeAttr("shape");
             $compile(element)(scope);
         }
     }

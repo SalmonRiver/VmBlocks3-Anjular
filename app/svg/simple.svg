@@ -34,6 +34,9 @@
 		.st13 {fill:#dfdfdf;stroke:#008000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.16}
 		.st14 {fill:#ff8040;stroke:#008000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.16}
 		.st15 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+		
+		.st14a {fill:#ff8040}
+		.st14b {stroke:#008000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.16}
 	]]>
 	</style>
 
@@ -76,19 +79,14 @@
 		<v:layer v:name="SensorLayer" v:index="2"/>
 		<v:layer v:name="Equipment" v:index="3"/>
 		<v:layer v:name="InvisibleLineLayer" v:index="4" v:visibility="hidden"/>
+		
+		
+		
 		<g id="shape2-8" v:mID="2" v:groupContext="shape" transform="translate(1.38403,-498.444)">
-			<title>TextBox.181</title>
-			<desc>In</desc>
-			<v:custProps>
-				<v:cp v:nameU="VariableToDisplay" v:lbl="The variable to display is an integer code" v:langID="1033"
-						v:val="VT0(1):26"/>
-				<v:cp v:nameU="ComponentType" v:langID="1033" v:val="VT0(400):26"/>
-			</v:custProps>
-			<v:textBlock v:margins="rect(4,4,4,4)"/>
-			<v:textRect cx="133.276" cy="604.066" width="266.56" height="15.8672"/>
-			<rect x="0" y="596.133" width="266.552" height="15.8672" class="st6"/>
-			<rect x="0" y="596.133" width="266.552" height="15.8672" class="st7"/>
-			<text x="125.87" y="609.4" class="st8" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>In</text>		</g>
+		
+			<text x="125.87" y="609.4" class="st8" >In222</text>		</g>
+			
+			
 		<g id="shape3-12" v:mID="3" v:groupContext="shape" transform="translate(-15.1509,-337.5)">
 			<title>TextBox.181.3</title>
 			<v:custProps>
@@ -133,12 +131,13 @@
 					class="st11"/>
 		</g>
 		<g id="shape1-33" v:mID="1" v:groupContext="shape" transform="translate(90,-365.86)">
-			<title>In</title>
+			<title>The inlet source of fluid</title>
 			<v:custProps>
 				<v:cp v:nameU="ComponentType" v:lbl="ComponentType" v:langID="1033" v:val="VT0(10):26"/>
 			</v:custProps>
 			<v:userDefs>
 				<v:ud v:nameU="SourceGUID" v:prompt="" v:val="VT15({8FEA0869-9FFD-4147-9E80-86302876DFD8}):41"/>
+				<vm:dave vm:nameU="test1" v:pp=""/> 
 			</v:userDefs>
 			<v:textBlock v:margins="rect(4,4,4,4)"/>
 			<v:textRect cx="44.6599" cy="558.966" width="89.32" height="106.067"/>
@@ -150,18 +149,9 @@
 						 A7.37349 7.37349 0 0 1 80.68 521.17 L58.71 517.33 A3.47897 3.47897 0 0 1 55.82 513.91 A3.47897 3.47897 0
 						 0 1 58.71 510.48 ZM78.15 600.84 L89.32 600.84 L89.32 575.71 L78.15 575.71 L78.15 600.84 Z" class="st13"/>
 		</g>
-		<g id="shape6-35" v:mID="6" v:groupContext="shape" transform="translate(450,-230.651)">
-			<title>V</title>
-			<v:custProps>
-				<v:cp v:nameU="ComponentType" v:langID="1033" v:val="VT0(30):26"/>
-			</v:custProps>
-			<v:userDefs>
-				<v:ud v:nameU="SourceGUID" v:prompt=""/>
-				<v:ud v:nameU="SourceGUID" v:prompt="" v:val="VT15({558BE9C8-9ADD-4879-8614-DBE1DDF64C5C}):41"/>
-			</v:userDefs>
-			<v:textBlock v:margins="rect(4,4,4,4)"/>
-			<v:textRect cx="10.8" cy="612" width="12.01" height="22.4037"/>
-			<path d="M0 508.45 L51.78 508.45 L0 612 L51.78 612 L0 508.45 Z" class="st14"/>
+		<g id="shape6-35" v:mID="6" v:groupContext="shape" transform="translate(450,-230.651)"  class="st14a st14b" >
+			<title>a valve to reduce pressure</title>
+			<path d="M0 508.45 L51.78 508.45 L0 612 L51.78 612 L0 508.45 Z"  />
 		</g>
 	</g>
 </svg>
