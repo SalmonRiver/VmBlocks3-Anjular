@@ -16,18 +16,36 @@ var getSourceGUID = function (element) {
         if (nameU == "SourceGUID") {
             var SourceGUID = vUds[i].getAttribute("v:val");
             // parse out the exact guuid which is between the brackets {} 
-            SourceGUID=SourceGUID.substring(SourceGUID.lastIndexOf("{")+1,SourceGUID.lastIndexOf("}"));
+            SourceGUID = SourceGUID.substring(SourceGUID.lastIndexOf("{") + 1, SourceGUID.lastIndexOf("}"));
             return SourceGUID;
         }
     }
     return null;
 }
 
+var getComponentType = function (element) {
+    var comp = element[0].getElementsByTagName("v:cp");
+    var i;
+    for (i = 0; i < comp.length; i++) {
+        if (comp[i].hasAttribute("v:nameu")) {
+            var compName = comp[i].getAttribute("v:nameu");
+            if (compName == "ComponentType") {
+                if (comp[i].hasAttribute("v:val")) {
+                    var ComponentType = comp[i].getAttribute("v:val");
+                    // parse out the exact guuid which is between the parenthases () 
+                    ComponentType = ComponentType.substring(ComponentType.lastIndexOf("(") + 1, ComponentType.lastIndexOf(")"));
+                    return ComponentType;
+                }
+            }
+        }
+    }
+    return null;
+}
 
 angular.module('vmBlocks3App').directive('svg2Diagram', ['$compile', function ($compile) {
     return {
         restrict: 'A',
-        templateUrl: 'svg/simple.svg',
+        templateUrl: 'svg/alky.svg',
         link: function (scope, element, attrs) {
             var shapes = element[0].querySelectorAll('g')
 
@@ -52,8 +70,8 @@ angular.module('vmBlocks3App').directive('shape', ['$compile', function ($compil
             scope.regionClick = function () {
                 if (element.attr("id") != null) {
 
-                    scope.SourceGUID = getSourceGUID(element);
-                    alert(scope.SourceGUID);
+                    scope.ComponentType = getComponentType(element);
+                    alert(scope.ComponentType);
 
                 }
             };
