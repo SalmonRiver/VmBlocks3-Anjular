@@ -7,46 +7,48 @@
  * # svg2Directive
  */
 
-var getSourceGUID = function (element) {
-    var vUds = element[0].getElementsByTagName("v:ud");
-    var i;
-    for (i = 0; i < vUds.length; i++) {
-
-        var nameU = vUds[i].getAttribute("v:nameu");
-        if (nameU != null) {
-            if (nameU == "SourceGUID") {
-                var SourceGUID = vUds[i].getAttribute("v:val");
-                // parse out the exact guuid which is between the brackets {} 
-            
-                SourceGUID = SourceGUID.substring(SourceGUID.lastIndexOf("{") + 1, SourceGUID.lastIndexOf("}"));
-                return SourceGUID;
-            }
-        }
-    }
-    return null;
-}
-var getComponentType = function (element) {
-    var comp = element[0].getElementsByTagName("v:cp");
+var getVisioAttribute = function (element, sRootNodeName, sVariableName, sVariableValueName) {
+    var comp = element[0].getElementsByTagName(sRootNodeName);
+    var sValueAtt = "v:val";
     var i;
     for (i = 0; i < comp.length; i++) {
-        if (comp[i].hasAttribute("v:nameu")) {
-            var compName = comp[i].getAttribute("v:nameu");
-            if (compName == "ComponentType") {
-                if (comp[i].hasAttribute("v:val")) {
-                    var ComponentType = comp[i].getAttribute("v:val");
-                    // parse out the exact guuid which is between the parenthases () 
-                    ComponentType = ComponentType.substring(ComponentType.lastIndexOf("(") + 1, ComponentType.lastIndexOf(")"));
-                    return ComponentType;
+        if (comp[i].hasAttribute(sVariableName)) {
+            var compName = comp[i].getAttribute(sVariableName);
+            if (compName == sVariableValueName) {
+                if (comp[i].hasAttribute(sValueAtt)) {
+                    var answer = comp[i].getAttribute(sValueAtt);
+                    return answer;
                 }
             }
         }
     }
     return null;
 }
+
+var getComponentType = function (element) {
+    var sRawComponentType = getVisioAttribute(element, "v:cp", "v:nameu", "ComponentType")
+    if (sRawComponentType != null) {
+        // parse out the exact guuid which is between the parenthases () 
+        var ComponentType = sRawComponentType.substring(sRawComponentType.lastIndexOf("(") + 1, sRawComponentType.lastIndexOf(")"));
+        return ComponentType;
+    }
+
+}
+
+var getSourceGUID = function (element) {
+    var sRawSourceGUID = getVisioAttribute(element, "v:ud", "v:nameu", "SourceGUID")
+    if (sRawSourceGUID != null) {
+        // parse out the exact guuid which is between the brackets {} 
+        var SourceGUID = sRawSourceGUID.substring(sRawSourceGUID.lastIndexOf("{") + 1, sRawSourceGUID.lastIndexOf("}"));
+        return SourceGUID;
+    }
+}
+
+
 angular.module('vmBlocks3App').directive('svg2Diagram', ['$compile', function ($compile) {
     return {
         restrict: 'A',
-        templateUrl: 'svg/alky.svg',
+        templateUrl: 'svg/simple.svg',
         link: function (scope, element, attrs) {
             var shapes = element[0].querySelectorAll('g')
 
@@ -69,8 +71,9 @@ angular.module('vmBlocks3App').directive('shape', ['$compile', function ($compil
             scope.regionClick = function () {
                 if (element.attr("id") != null) {
 
-                    scope.ComponentType = getComponentType(element);
-                    alert(scope.ComponentType);
+                    scope.componentType = getComponentType(element);
+                    scope.sourceGuid = getSourceGUID(element)
+                    alert("Component Type = " + scope.componentType +  "     SourceGuid = " + scope.sourceGuid);
 
                 }
             };
