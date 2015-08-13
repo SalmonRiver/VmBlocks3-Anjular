@@ -13,16 +13,28 @@ var getSourceGUID = function (element) {
     for (i = 0; i < vUds.length; i++) {
 
         var nameU = vUds[i].getAttribute("v:nameu");
+<<<<<<< HEAD
         if (nameU == "SourceGUID") {
             var SourceGUID = vUds[i].getAttribute("v:val");
             // parse out the exact guuid which is between the brackets {} 
             SourceGUID = SourceGUID.substring(SourceGUID.lastIndexOf("{") + 1, SourceGUID.lastIndexOf("}"));
             return SourceGUID;
+=======
+        if (nameU != null) {
+            if (nameU == "SourceGUID") {
+                var SourceGUID = vUds[i].getAttribute("v:val");
+                // parse out the exact guuid which is between the brackets {} 
+            
+                SourceGUID = SourceGUID.substring(SourceGUID.lastIndexOf("{") + 1, SourceGUID.lastIndexOf("}"));
+                return SourceGUID;
+            }
+>>>>>>> origin/master
         }
     }
     return null;
 }
 
+<<<<<<< HEAD
 var getComponentType = function (element) {
     var comp = element[0].getElementsByTagName("v:cp");
     var i;
@@ -42,6 +54,8 @@ var getComponentType = function (element) {
     return null;
 }
 
+=======
+>>>>>>> origin/master
 angular.module('vmBlocks3App').directive('svg2Diagram', ['$compile', function ($compile) {
     return {
         restrict: 'A',
@@ -58,8 +72,6 @@ angular.module('vmBlocks3App').directive('svg2Diagram', ['$compile', function ($
         }
     }
 }]);
-
-
 
 
 angular.module('vmBlocks3App').directive('shape', ['$compile', function ($compile) {
