@@ -116,6 +116,7 @@
 			</v:custProps>
 			<v:userDefs>
 				<v:ud v:nameU="SourceGUID" v:prompt="" v:val="VT15({EDF70677-1207-4962-952C-5619D3AA4FD9}):41"/>
+				<v:ud v:nameU="dave" v:prompt="" v:val="crap"/>
 			</v:userDefs>
 			<path d="M0 612 L292.07 612 A4.5 4.5 0 0 1 296.57 616.5 L296.57 687.65" class="st9"/>
 		</g>

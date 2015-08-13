@@ -7,6 +7,22 @@
  * # svg2Directive
  */
 
+var getSourceGUID = function (element) {
+    var vUds = element[0].getElementsByTagName("v:ud");
+    var i;
+    for (i = 0; i < vUds.length; i++) {
+
+        var nameU = vUds[i].getAttribute("v:nameu");
+        if (nameU == "SourceGUID") {
+            var SourceGUID = vUds[i].getAttribute("v:val");
+            // parse out the exact guuid which is between the brackets {} 
+            SourceGUID=SourceGUID.substring(SourceGUID.lastIndexOf("{")+1,SourceGUID.lastIndexOf("}"));
+            return SourceGUID;
+        }
+    }
+    return null;
+}
+
 
 angular.module('vmBlocks3App').directive('svg2Diagram', ['$compile', function ($compile) {
     return {
@@ -18,7 +34,6 @@ angular.module('vmBlocks3App').directive('svg2Diagram', ['$compile', function ($
             angular.forEach(shapes, function (path, key) {
                 var shapeElement = angular.element(path);
                 shapeElement.attr("shape", "");
-             //   console.log(shapeElement);
                 $compile(shapeElement)(scope);
 
             })
@@ -26,25 +41,20 @@ angular.module('vmBlocks3App').directive('svg2Diagram', ['$compile', function ($
     }
 }]);
 
+
+
+
 angular.module('vmBlocks3App').directive('shape', ['$compile', function ($compile) {
     return {
         restrict: 'A',
         scope: true,
         link: function (scope, element, attrs) {
-            scope.elementId = element.attr("id");
             scope.regionClick = function () {
-                if (scope.elementId != null) {
-         //   scope.elementtransform = element.attr("transform");
-                //    alert("Hello world,  My transform is: " + scope.elementtransform);
-                  
-                  var vUd = element[0].getElementsByTagName("v:ud");
-                   console.log(vUd);
-                  var nameU = vUd[0].getAttribute("v:nameu");
-                      
-                  
-                    console.log(nameU)
-                 //   var map = element[0].querySelectorAll('NamedNodeMap').getNamedItem('v:custprops');
-                 //   console.log (scope.userDefs);
+                if (element.attr("id") != null) {
+
+                    scope.SourceGUID = getSourceGUID(element);
+                    alert(scope.SourceGUID);
+
                 }
             };
             element.attr("ng-click", "regionClick()");
