@@ -32,13 +32,17 @@ angular.module('vmBlocks3App').directive('shape', ['$compile', function ($compil
         scope: true,
         link: function (scope, element, attrs) {
             scope.elementId = element.attr("id");
-            scope.elementtransform = element.attr("transform");
             scope.regionClick = function () {
                 if (scope.elementId != null) {
-                    
-                    
-                    alert("Hello world,  My transform is: " + scope.elementtransform);
-                    console.log(element[0].getElementsByTagName("v:ud"))
+         //   scope.elementtransform = element.attr("transform");
+                //    alert("Hello world,  My transform is: " + scope.elementtransform);
+                  
+                  var vUd = element[0].getElementsByTagName("v:ud");
+                   console.log(vUd);
+                  var nameU = vUd[0].getAttribute("v:nameu");
+                      
+                  
+                    console.log(nameU)
                  //   var map = element[0].querySelectorAll('NamedNodeMap').getNamedItem('v:custprops');
                  //   console.log (scope.userDefs);
                 }
