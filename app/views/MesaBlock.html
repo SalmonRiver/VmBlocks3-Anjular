@@ -40,14 +40,18 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <input id="rb1" type="radio" name="rbFlowOrDuty" ng-value="true" ng-model="MesaBlock.bFlowIfTrue">&nbsp Flow</div>
-                        <div class="col-sm-9">
-                            <input type="number" value={{MesaBlock.dFlow}} ng-disabled="!MesaBlock.bFlowIfTrue">&nbsp {{MesaBlock.sFlowUnits}}</div>
+                        <div class="col-sm-4">
+                            <input type="number" value={{MesaBlock.dFlow}} ng-disabled="!MesaBlock.bFlowIfTrue">
+                        </div>
+                        <div class="col-sm-5"> &nbsp {{MesaBlock.sFlowUnits}} </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-3">
                             <input type="radio" name="rbFlowOrDuty" ng-value="false" ng-model="MesaBlock.bFlowIfTrue">&nbsp Duty</div>
-                        <div class="col-sm-9">
-                            <input type="number" value={{MesaBlock.dDuty}} ng-disabled="MesaBlock.bFlowIfTrue">&nbsp {{MesaBlock.sDutyUnits}}</div>
+                        <div class="col-sm-4">
+                            <input type="number" value={{MesaBlock.dDuty}} ng-disabled="MesaBlock.bFlowIfTrue"></div>
+
+                        <div class="col-sm-5"> &nbsp {{MesaBlock.sDutyUnits}} </div>
                     </div>
                 </div>
                 <br>
