@@ -66,10 +66,18 @@ angular.module('vmBlocks3App').directive('svg2Diagram', ['$compile', function ($
     }
 }]);
 
+var onGetBlockNameComplete = function (sBlockName, $location) {
+    console.log($location)
 
+    $location.path("/MesaBlock/" + sBlockName);
+}
 
+var onGetBlockNameError = function (reason) {
+    console.log(reason);
+}
 
-angular.module('vmBlocks3App').directive('shape', ['$compile', '$location', function ($compile, $location) {
+angular.module('vmBlocks3App').directive('shape', ['$compile', "$location", "VmWebAPI", function ($compile, $location, VmWebAPI) {
+
     return {
         restrict: 'A',
         scope: true,
@@ -81,25 +89,20 @@ angular.module('vmBlocks3App').directive('shape', ['$compile', '$location', func
                     scope.sourceGuid = getSourceGUID(element)
 
                     if (scope.sourceGuid != null) {
-
-
                         alert("Component Type = " + scope.componentType + "     SourceGuid = " + scope.sourceGuid);
-                        // FIXME
-                        // need to get blockname from guid via a webervice call 
-                        // faking for now
-                    
-                    
+
                         if (scope.componentType == 103) {
-// this is a process plant and needs to show a new page
+                            // this is a process plant and needs to show a new page
                         }
                         else if (scope.componentType > 1 && scope.componentType < 100) {
-// this is a block and needs to show a dialog 
+                            // this is a block and needs to show a dialog 
+                            scope.blockname = "Waste Heat LP Steam";
 
-                            scope.blockname = "E-5154";   // fake 
-                            $location.path("/MesaBlock/" + scope.blockname);     // need to add the block to load the form on 
-                     
+                            VmWebAPI.getBlockName(scope.sourceGuid, $location)
+                                .then(onGetBlockNameComplete, onGetBlockNameError)
                         }
                     }
+
                 }
             };
             element.attr("ng-click", "regionClick()");
