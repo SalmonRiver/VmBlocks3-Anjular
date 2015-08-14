@@ -48,7 +48,11 @@ var getSourceGUID = function (element) {
 angular.module('vmBlocks3App').directive('svg2Diagram', ['$compile', function ($compile) {
     return {
         restrict: 'A',
-        templateUrl: 'svg/simple.svg',
+        //  templateUrl: 'svg/simple.svg',
+        templateUrl: function (elem, attrs) {
+            // where to get the desired svg file 
+            return 'svg/the plant.svg';
+        },
         link: function (scope, element, attrs) {
             var shapes = element[0].querySelectorAll('g')
 
@@ -63,7 +67,9 @@ angular.module('vmBlocks3App').directive('svg2Diagram', ['$compile', function ($
 }]);
 
 
-angular.module('vmBlocks3App').directive('shape', ['$compile', function ($compile) {
+
+
+angular.module('vmBlocks3App').directive('shape', ['$compile', '$location', function ($compile, $location) {
     return {
         restrict: 'A',
         scope: true,
@@ -73,8 +79,27 @@ angular.module('vmBlocks3App').directive('shape', ['$compile', function ($compil
 
                     scope.componentType = getComponentType(element);
                     scope.sourceGuid = getSourceGUID(element)
-                    alert("Component Type = " + scope.componentType +  "     SourceGuid = " + scope.sourceGuid);
 
+                    if (scope.sourceGuid != null) {
+
+
+                        alert("Component Type = " + scope.componentType + "     SourceGuid = " + scope.sourceGuid);
+                        // FIXME
+                        // need to get blockname from guid via a webervice call 
+                        // faking for now
+                    
+                    
+                        if (scope.componentType == 103) {
+// this is a process plant and needs to show a new page
+                        }
+                        else if (scope.componentType > 1 && scope.componentType < 100) {
+// this is a block and needs to show a dialog 
+
+                            scope.blockname = "E-5154";   // fake 
+                            $location.path("/MesaBlock/" + scope.blockname);     // need to add the block to load the form on 
+                     
+                        }
+                    }
                 }
             };
             element.attr("ng-click", "regionClick()");
