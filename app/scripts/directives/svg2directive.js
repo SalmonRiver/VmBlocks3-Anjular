@@ -62,8 +62,17 @@ angular.module('vmBlocks3App').directive('svg2Diagram', ['$compile', function ($
     }
 }]);
 
+var onGetBlockNameComplete = function(sBlockName, $location){
+    console.log($location)
+        
+    $location.path("/MesaBlock/" + sBlockName);
+}
 
-angular.module('vmBlocks3App').directive('shape', ['$compile', function ($compile) {
+var onGetBlockNameError = function(reason) {
+    console.log(reason);
+}
+
+angular.module('vmBlocks3App').directive('shape', ['$compile', "$location", "VmWebAPI", function ($compile, $location, VmWebAPI) {
     return {
         restrict: 'A',
         scope: true,
@@ -74,7 +83,13 @@ angular.module('vmBlocks3App').directive('shape', ['$compile', function ($compil
                     scope.componentType = getComponentType(element);
                     scope.sourceGuid = getSourceGUID(element)
                     alert("Component Type = " + scope.componentType +  "     SourceGuid = " + scope.sourceGuid);
-
+                    //fixme
+                    
+                    scope.blockname = "Waste Heat LP Steam";
+                    
+                    VmWebAPI.getBlockName(scope.sourceGuid, $location)
+                    .then(onGetBlockNameComplete, onGetBlockNameError);
+ 
                 }
             };
             element.attr("ng-click", "regionClick()");
