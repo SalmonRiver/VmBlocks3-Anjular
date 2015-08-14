@@ -27,7 +27,7 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
-      .when('/svg', {
+      .when('/svg/:DiagramName', {
         templateUrl: 'views/svg.html',
         controller: 'SvgCtrl'
       })

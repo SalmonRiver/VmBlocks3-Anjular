@@ -34,7 +34,7 @@ angular.module('vmBlocks3App')
     // need  to condition the url removing special characters 
     
     var OnComplete = function (MesaBlockValues) {
-      console.log("Getting data for property: " + MesaBlockValues.PropertyIndex + "   Value= " + MesaBlockValues.StringValue);
+   //   console.log("Getting data for property: " + MesaBlockValues.PropertyIndex + "   Value= " + MesaBlockValues.StringValue);
       $scope.MesaBlock.BlockName = MesaBlockValues.BlockName;
 
       if (MesaBlockValues.StringValue == "Invalid Property") {

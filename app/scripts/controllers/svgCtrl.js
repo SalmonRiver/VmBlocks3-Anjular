@@ -11,9 +11,7 @@
 
 angular.module('vmBlocks3App')
 	   .controller('SvgCtrl', ['$scope', function ($scope) {
-
-console.log ("svg controller active");
-
+		   
     }]);
 
   
