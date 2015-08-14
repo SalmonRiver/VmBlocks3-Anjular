@@ -35,21 +35,29 @@
       var PropertyIndexUrl = ' and PropertyIndex eq ' + iPropertyIndex;
       var SolutionUrl = ' and Solution eq ' + iSolutuionIndex;
       var DetailUrl = BlockOutPutUrl + BlockNameArgUrl + PropertyIndexUrl + SolutionUrl
-     // console.log(DetailUrl);
+      console.log(DetailUrl);
 
       return $http.get(DetailUrl)
         .then(function (response) {
           var mbReturn = response.data.value[0];
-   //       console.log(mbReturn);
+          //       console.log(mbReturn);
           return mbReturn;
         });
     };
 
-
-
-
-
+    var getBlockName = function (SourceGUID, $location) {
+     
+      return $http.get(VmesaURL) //find correct URL
+        .then(function (response) {
+           var sBlockName = "Waste Heat LP Steam" //FIXME
+          return sBlockName, $location;
+        });     
+    }
+    
+    
+    
     return {
+      getBlockName: getBlockName,
       getBlocks: getBlocks,
       getBlockProperty: getBlockProperty
     };
