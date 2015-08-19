@@ -12,9 +12,17 @@
 
   var VmWebAPI = function ($http) {
 
-    var VmesaURL = "http://demo1.svmesa.com/vmwebapi/Odata/MesaBlocks";
-    var BlockDetailUrl = "http://demo1.svmesa.com/vmwebapi/odata/VmMesaBlockProperties?$filter=BlockName eq ";
-    var BlockOutPutUrl = "http://demo1.svmesa.com/vmwebapi/Odata/VmBlockData?$filter=";
+ //   var VmesaURL = "http://demo1.svmesa.com/vmwebapi/Odata/MesaBlocks";
+ //   var BlockDetailUrl = "http://demo1.svmesa.com/vmwebapi/odata/VmMesaBlockProperties?$filter=BlockName eq ";
+ //   var BlockOutPutUrl = "http://demo1.svmesa.com/vmwebapi/Odata/VmBlockData?$filter=";
+    
+    
+
+    var VmesaURL = "http://localhost:9001/Odata/MesaBlocks";
+    var BlockDetailUrl = "http://localhost:9001/odata/VmMesaBlockProperties?$filter=BlockName eq ";
+    var BlockOutPutUrl = "http://localhost:9001/Odata/VmBlockData?$filter=";
+    
+    
     
     //   http://demo1.svmesa.com/vmwebapi/odata/VmMesaBlockProperties?$filter=BlockName eq '600-150-LD' 
 
@@ -46,7 +54,7 @@
     };
 
     var getBlockNameFromGuidAndAct = function (scope) {
-//fixme need to add this feature to the VmWebApi
+      //fixme need to add this feature to the VmWebApi
       return $http.get(VmesaURL) //find correct URL
         .then(function (response) {
           //  var sBlockName = "Waste Heat LP Steam" //FIXME
@@ -58,10 +66,27 @@
         });
     }
 
+
+    var blockName = "BOILER-1-FO";
+    var PropertyIndex = 7;
+    var newValue = 112;
+    var vmWriteToBlock = function () {
+      $http(
+        {
+          method: 'PATCH',
+          url: "http://localhost:9001/OData/VmBlockData('')",
+          data:
+          {
+            "BlockName": blockName, "PropertyIndex": PropertyIndex, "StringValue": newValue
+          }
+        });
+    }
+
     return {
       getBlockNameFromGuidAndAct: getBlockNameFromGuidAndAct,
       getBlocks: getBlocks,
-      getBlockProperty: getBlockProperty
+      getBlockProperty: getBlockProperty,
+      vmWriteToBlock: vmWriteToBlock
     };
   };
 

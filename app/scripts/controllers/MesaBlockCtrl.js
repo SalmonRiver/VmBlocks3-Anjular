@@ -22,6 +22,14 @@ angular.module('vmBlocks3App')
       sDescription: "Some text about the block goes here.  can have line feeds etc"
     }
 
+    $scope.writeToVm = function () {
+      VmWebAPI.vmWriteToBlock(); 
+      
+      console.log("writetoVm");
+      
+
+    }
+
     var url = $location.url();
     var sBlockName = url.replace("/MesaBlock/", "");
     var eStatusEnum = {
@@ -29,12 +37,13 @@ angular.module('vmBlocks3App')
       OFF: { name: "StatusOff", value: 2, code: "M" },
       UNAVAILABLE: { name: "StatusUnavailable", value: 3, code: "L" },
     };
+
+
     
     
     // need  to condition the url removing special characters 
-    
     var OnComplete = function (MesaBlockValues) {
-   //   console.log("Getting data for property: " + MesaBlockValues.PropertyIndex + "   Value= " + MesaBlockValues.StringValue);
+      //   console.log("Getting data for property: " + MesaBlockValues.PropertyIndex + "   Value= " + MesaBlockValues.StringValue);
       $scope.MesaBlock.BlockName = MesaBlockValues.BlockName;
 
       if (MesaBlockValues.StringValue == "Invalid Property") {
@@ -45,7 +54,7 @@ angular.module('vmBlocks3App')
       if (MesaBlockValues.PropertyIndex == '7') {
         $scope.MesaBlock.dFlow = MesaBlockValues.StringValue;
         if ($scope.MesaBlock.dFlow > 0) $scope.MesaBlock.bFlowIfTrue = true
-        else  $scope.MesaBlock.bFlowIfTrue = false;
+        else $scope.MesaBlock.bFlowIfTrue = false;
       }
       else if (MesaBlockValues.PropertyIndex == '8') {
         $scope.MesaBlock.dTemperature = MesaBlockValues.StringValue;
@@ -59,8 +68,8 @@ angular.module('vmBlocks3App')
       else if (MesaBlockValues.PropertyIndex == '11') {
         $scope.MesaBlock.dPressure = MesaBlockValues.StringValue;
         if ($scope.MesaBlock.dPressure == 0) $scope.MesaBlock.bExhaustPressureIfTrue = true
-        else $scope.MesaBlock.bExhaustPressureIfTrue =false
-      }      
+        else $scope.MesaBlock.bExhaustPressureIfTrue = false
+      }
       else if (MesaBlockValues.PropertyIndex == '64') {
         $scope.MesaBlock.dDuty = MesaBlockValues.StringValue;
       }
